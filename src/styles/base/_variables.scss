@@ -1,0 +1,90 @@
+// ==========================================================================
+// General Variables
+// ==========================================================================
+
+//// Directories
+//// This should be prefixed to all asset urls
+//// $example: "#{$dir-theme}images/yourimage.jpg"
+//// ==========================================================================
+//$dir-theme: '/dist/assets/';
+////$dir-images: '#{$dir-theme}images/';
+////$dir-fonts: '#{$dir-theme}webfonts/';
+//
+//// Brand colours
+//// ==========================================================================
+//
+//$brand-gold: #EBBE40;
+//$brand-gold-dark: #CAA755;
+//$brand-black: #1A1818;
+//$brand-moss: #515836;
+//$brand-beige: #D1CCC5;
+//
+//// General colours
+//// ==========================================================================
+//$color-primary: $brand-gold;
+//$color-secondary: $brand-gold-dark;
+//
+//// Font colors
+//// ==========================================================================
+//$font-color-primary: $brand-black;
+//$font-color-secondary: $brand-gold-dark;
+//
+//// Font Families
+//// ==========================================================================
+//$font-primary: 'Founders Grotesk', Arial, sans-serif;
+//$font-secondary: 'F37 Wicklow Regular', Arial, sans-serif;
+
+
+
+// Grid system layout
+// ==========================================================================
+$grid-columns: 12 !default; // Set the number of columns you want to use on your layout.
+
+$gutter-width: 1.5625rem !default; // Set the gutter between columns.
+$outer-margin: 3.125rem !default; // Set a margin for the container sides.
+
+// Media queries breakpoints
+// ==========================================================================
+$screen-xxs:  640px;       // Extra small screen / phone (portrait) 320px
+$screen-xs:   768px;       // Extra small screen / phone (portrait) 320px
+$screen-sm:   1024px;       // Small screen / phone (landscape) 576px
+$screen-md:   1280px;       // Small screen / tablet 768px
+$screen-lg:   1600px;       // Large screen / desktop 992px
+$screen-xl:   1920px;       // Extra Large screen / wide desktop 1200px
+$screen-xxl:  2560px;       // Extra Large screen / wide desktop 1200px
+
+// Media Queries (Mobile first approach)
+// Usage
+// @media #{$xxs} {}
+// @media #{$xs} {}
+// @media #{$sm} {}
+// @media #{$md} {}
+// @media #{$lg} {}
+// @media #{$xl} {}
+// @media #{$xxl} {}
+// ==========================================================================
+$xxs:   #{'only screen and (min-width: #{$screen-xxs})'};
+$xs:    #{'only screen and (min-width: #{$screen-xs})'};
+$sm:    #{'only screen and (min-width: #{$screen-sm})'};
+$md:    #{'only screen and (min-width: #{$screen-md})'};
+$lg:    #{'only screen and (min-width: #{$screen-lg})'};
+$xl:    #{'only screen and (min-width: #{$screen-xl})'};
+$xxl:   #{'only screen and (min-width: #{$screen-xxl})'};
+
+$media-queries: (
+        xxs:  $xxs,
+        xs:   $xs,
+        sm:   $sm,
+        md:   $md,
+        lg:   $lg,
+        xl:   $xl,
+        xxl:  $xxl,
+);
+
+// Grid settings (name, breakpoint, gutter)
+// Usage
+// @media #{$not-mobile} {}
+// @media #{$not-desktop} {}
+// ==========================================================================
+$not-mobile: #{'(min-width: #{$screen-md} + 1)'};
+$not-desktop: #{'(max-width: #{$screen-md})'};

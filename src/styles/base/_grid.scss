@@ -1,0 +1,131 @@
+// ==========================================================================
+// Grid
+// ==========================================================================
+
+// Create or remove breakpoints for your project
+// Syntax:
+// name SIZE rem,
+$breakpoints:
+        xxs $screen-xxs $screen-xxs,
+        xs  $screen-xs $screen-xs,
+        sm  $screen-xs $screen-xs,
+        md  $screen-md $screen-md,
+        lg  $screen-lg $screen-lg,
+        xl  $screen-xl $screen-xl,
+        xxl $screen-xxl $screen-xxl !default;
+
+$gutter-compensation: $gutter-width * .5 * -1;
+$half-gutter-width: $gutter-width * .5;
+
+.container {
+  padding-right: $outer-margin;
+  padding-left: $outer-margin;
+}
+
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $outer-margin / 2;
+  padding-left: $outer-margin / 2;
+
+  @media #{$md} {
+    padding-right: $outer-margin;
+    padding-left: $outer-margin;
+  }
+}
+
+.row {
+  box-sizing: border-box;
+  @include flexbox();
+  @include flex(0, 1, auto);
+  @include flex-direction(row);
+  @include flex-wrap(wrap);
+  margin-right: $gutter-compensation;
+  margin-left: $gutter-compensation;
+}
+
+
+// to check
+@mixin flex-column-common {
+  box-sizing: border-box;
+
+  // split @include flex(0, 0, auto) into individual props
+  @include flex-grow(0);
+  @include flex-shrink(0);
+
+  // we leave @include flex-basis(auto) out of common because
+  // in some spots we need it and some we dont
+  // more why here: https://github.com/kristoferjoseph/flexboxgrid/issues/126
+
+  padding-right: $half-gutter-width;
+  padding-left: $half-gutter-width;
+}
+
+$name: xs;
+
+.column-#{$name} {
+  @include flex-column-common;
+  @include flex-basis(auto);
+}
+
+@for $i from 1 through $grid-columns {
+  .column-#{$name}-#{$i} {
+    @include flex-column-common;
+    @include flex-basis(100% / $grid-columns * $i);
+    max-width: 100% / $grid-columns * $i;
+  }
+}
+
+@for $i from 1 through $grid-columns {
+  .column-#{$name}-offset-#{$i} {
+    @include flex-column-common;
+    margin-left: 100% / $grid-columns * $i;
+  }
+}
+
+.column-#{$name} {
+  @include flex-grow(1);
+  @include flex-basis(0);
+  max-width: 100%;
+}
+
+@each $breakpoint in $breakpoints {
+  $name: nth($breakpoint, 1);
+  $size: nth($breakpoint, 2);
+  $container: nth($breakpoint, 3);
+
+  @media only screen and (min-width: $size) {
+    .container {
+      width: $container;
+      margin: auto;
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    .column-#{$name} {
+      @include flex-column-common;
+      @include flex-basis(auto);
+    }
+
+    @for $i from 1 through $grid-columns {
+      .column-#{$name}-#{$i} {
+        @include flex-column-common;
+        @include flex-basis(100% / $grid-columns * $i);
+        max-width: 100% / $grid-columns * $i;
+      }
+    }
+
+    @for $i from 1 through $grid-columns {
+      .column-#{$name}-offset-#{$i} {
+        @include flex-column-common;
+        margin-left: 100% / $grid-columns * $i
+      }
+    }
+
+    .column-#{$name} {
+      @include flex-grow(1);
+      @include flex-basis(0);
+      max-width: 100%;
+    }
+  }
+}
